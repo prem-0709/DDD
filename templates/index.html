@@ -46,8 +46,8 @@
                     </div>
                     
                     <div class="controls">
-                        <button id="start-btn" class="btn">Start Monitoring</button>
-                        <button id="stop-btn" class="btn" disabled>Stop Monitoring</button>
+                        <button id="start-btn" class="btn" onclick="startMonitoring()">Start Monitoring</button>
+                        <button id="stop-btn" class="btn" onclick="stopMonitoring()" disabled>Stop Monitoring</button>
                         <button id="settings-btn" class="btn">Settings</button>
                     </div>
                 </div>
@@ -102,5 +102,24 @@
     <audio id="alert-sound" src="{{ url_for('static', filename='audio/alert.mp3') }}" preload="auto"></audio>
     
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // JavaScript for Start/Stop Monitoring buttons
+        function startMonitoring() {
+            document.getElementById("start-btn").disabled = true;
+            document.getElementById("stop-btn").disabled = false;
+            document.getElementById("status-text").innerText = "Monitoring in progress...";
+            document.getElementById("status-indicator").classList.remove("status-normal");
+            document.getElementById("status-indicator").classList.add("status-active");
+        }
+
+        function stopMonitoring() {
+            document.getElementById("start-btn").disabled = false;
+            document.getElementById("stop-btn").disabled = true;
+            document.getElementById("status-text").innerText = "Monitoring stopped";
+            document.getElementById("status-indicator").classList.remove("status-active");
+            document.getElementById("status-indicator").classList.add("status-normal");
+        }
+    </script>
 </body>
-</html> 
+</html>
